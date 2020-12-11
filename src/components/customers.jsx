@@ -2,7 +2,7 @@ import React from 'react';
 
 const Customers = props => {
 
-  const {customers} = props
+  const {customers, UpdateCustomerBtn, DeleteCustomerBtn} = props
 
   return (
     <div>
@@ -27,6 +27,10 @@ const Customers = props => {
     <td>{customer.email}</td>
     <td>{customer.phoneNumber}</td>
     <td>{customer.vin}</td>
+    <td><UpdateCustomerBtn /></td>
+    <td><DeleteCustomerBtn /></td>
+
+
     </tr>
     )) }
     

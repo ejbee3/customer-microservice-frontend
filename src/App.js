@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import Customers from './components/customers'
 import CustomerForm from './components/CustomerForm';
+import UpdateCustomerBtn from './components/updateCustomer'
+import DeleteCustomerBtn from './components/deleteCustomer'
+
 
 function App() {
   const [toggleNewCustomer, setToggleNewCustomer] = useState(false);
@@ -40,7 +43,7 @@ function App() {
     }}>
      <CustomerForm handleNewCustomer={handleNewCustomer} toggleNewCustomer={toggleNewCustomer}
      customer={customer} customerId={customerId} setCustomer={setCustomer} setCustomerId={setCustomerId} />
-     <Customers customers={customers} />
+     <Customers customers={customers} UpdateCustomerBtn={UpdateCustomerBtn} DeleteCustomerBtn={DeleteCustomerBtn} />
 
     </div>
   );
