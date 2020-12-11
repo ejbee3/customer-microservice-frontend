@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import axios from 'axios';
+import Customers from './components/customers'
+import CustomerForm from './components/CustomerForm';
 
 function App() {
+  const [toggleNewCustomer, setToggleNewCustomer] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const [customerId, setCustomerId] = useState(102)
+  const [customer, setCustomer] = useState({
+    firstName : '',
+    lastName: '',
+    email : '',
+    phoneNumber : '',
+    vin : '',
+  })
+
+
+
+  const handleNewCustomer = () => {
+    setToggleNewCustomer(!toggleNewCustomer)
+    return toggleNewCustomer
+  }
+
+  const fetchCustomers = () => {
+    axios.get('http://localhost:6063/api/customers')
+    .then(response => {
+      setCustomers(response.data)
+    })
+  }
+
+  useEffect(() => {
+    fetchCustomers()
+  }, [customers])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="d-flex flex-row justify-content-around align-items-center" style={{
+      backgroundColor: '#bebebe'
+    }}>
+     <CustomerForm handleNewCustomer={handleNewCustomer} toggleNewCustomer={toggleNewCustomer}
+     customer={customer} customerId={customerId} setCustomer={setCustomer} setCustomerId={setCustomerId} />
+     <Customers customers={customers} />
+
     </div>
   );
 }
