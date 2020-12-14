@@ -2,7 +2,7 @@ import React from 'react';
 
 const Customers = props => {
 
-  const {customers, UpdateCustomerBtn, DeleteCustomerBtn} = props
+  const {customers, UpdateCustomerBtn, DeleteCustomerBtn, handleIsUpdating} = props
 
   return (
     <div>
@@ -27,8 +27,8 @@ const Customers = props => {
     <td>{customer.email}</td>
     <td>{customer.phoneNumber}</td>
     <td>{customer.vin}</td>
-    <td><UpdateCustomerBtn /></td>
-    <td><DeleteCustomerBtn /></td>
+    <td><UpdateCustomerBtn handleIsUpdating={handleIsUpdating} customerId={customer.id} /></td>
+    <td><DeleteCustomerBtn customerId={customer.id} /></td>
 
 
     </tr>

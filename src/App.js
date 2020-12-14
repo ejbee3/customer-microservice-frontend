@@ -8,9 +8,10 @@ import DeleteCustomerBtn from './components/deleteCustomer'
 
 function App() {
   const [toggleNewCustomer, setToggleNewCustomer] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false)
   const [customers, setCustomers] = useState([]);
-  const [customerId, setCustomerId] = useState(102)
   const [customer, setCustomer] = useState({
+    id : Number,
     firstName : '',
     lastName: '',
     email : '',
@@ -23,6 +24,11 @@ function App() {
   const handleNewCustomer = () => {
     setToggleNewCustomer(!toggleNewCustomer)
     return toggleNewCustomer
+  }
+
+  const handleIsUpdating = () => {
+    setIsUpdating(!isUpdating)
+    return isUpdating
   }
 
   const fetchCustomers = () => {
@@ -42,8 +48,9 @@ function App() {
       backgroundColor: '#bebebe'
     }}>
      <CustomerForm handleNewCustomer={handleNewCustomer} toggleNewCustomer={toggleNewCustomer}
-     customer={customer} customerId={customerId} setCustomer={setCustomer} setCustomerId={setCustomerId} />
-     <Customers customers={customers} UpdateCustomerBtn={UpdateCustomerBtn} DeleteCustomerBtn={DeleteCustomerBtn} />
+     customer={customer} setCustomer={setCustomer} />
+     <Customers customers={customers} UpdateCustomerBtn={UpdateCustomerBtn} DeleteCustomerBtn={DeleteCustomerBtn}
+      handleIsUpdating={handleIsUpdating} />
 
     </div>
   );

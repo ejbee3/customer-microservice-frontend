@@ -4,7 +4,9 @@ import React from 'react';
 const CustomerForm = props => {
 
   let { handleNewCustomer, toggleNewCustomer, customer, 
-    setCustomer, setCustomerId, customerId } = props
+    setCustomer } = props
+
+  let idNum = 102
 
   const handleTextChange = event => {
     setCustomer({
@@ -15,15 +17,18 @@ const CustomerForm = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    setCustomerId(customerId += 1)
-    axios.post('http://localhost:6063/api/customers', {
+    setCustomer({
       ...customer,
-      customerId
+      [customer.id] : idNum += 1
+    })
+    axios.post('http://localhost:6063/api/customers', {
+      ...customer
     })
     .then((response) => {
       window.alert(`Added ${response.data.firstName} to customers!`)
       console.log(response.data)
       setCustomer({
+        id: Number,
         firstName : '',
         lastName: '',
         email : '',
